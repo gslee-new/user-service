@@ -8,7 +8,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://db-mysql.co923mei4igr.us-east-1.rds.amazonaws.com:3306/test_db
     username: admin
-    password: Aws92834001
+    password: 
 
 greeting:
   message: Welcome to the Simple E-commerce
