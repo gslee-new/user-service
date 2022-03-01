@@ -1,7 +1,6 @@
 package com.example.userservice.vo;
 
 import lombok.Data;
-import org.springframework.lang.NonNull;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;

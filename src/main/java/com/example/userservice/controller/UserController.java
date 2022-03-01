@@ -8,25 +8,22 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/")
 public class UserController {
-    private Environment env;
-
+    Environment env;
     UserService userService;
-
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
+    Greeting greeting;
 
     @Autowired
-    private Greeting greeting;
-
-    @Autowired
-    public UserController(Environment env) {
+    public UserController(UserService userService, Environment env, Greeting greeting) {
         this.env = env;
+        this.userService = userService;
+        this.greeting = greeting;
     }
 
     @GetMapping("/health_check")
@@ -41,13 +38,15 @@ public class UserController {
     }
 
     @PostMapping("/create")
-    public String createUser(@RequestBody RequestUser user) {
+    public ResponseEntity<RequestUser> createUser(@RequestBody RequestUser user) {
         ModelMapper mapper = new ModelMapper();
         mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 
         UserDto userDto = mapper.map(user, UserDto.class);
         userService.createUser(userDto);
-        return "";
+
+        RequestUser map = mapper.map(userDto, RequestUser.class);
+        return ResponseEntity.status(HttpStatus.CREATED).body(map);
     }
 
 
