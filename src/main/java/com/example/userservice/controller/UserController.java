@@ -3,7 +3,7 @@ package com.example.userservice.controller;
 import com.example.userservice.service.UserService;
 import com.example.userservice.vo.Greeting;
 import com.example.userservice.vo.RequestUser;
-import com.example.userservice.vo.UserDto;
+import com.example.userservice.dto.UserDto;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
