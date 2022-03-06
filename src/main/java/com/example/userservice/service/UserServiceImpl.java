@@ -1,8 +1,8 @@
 package com.example.userservice.service;
 
-import com.example.userservice.repository.UserRepository;
 import com.example.userservice.dto.UserDto;
 import com.example.userservice.repository.UserEntity;
+import com.example.userservice.repository.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,5 +75,17 @@ public class UserServiceImpl implements UserService{
 
         return new User(userEntity.getEmail(), userEntity.getEncryptedPwd(), true,
                 true, true, true, new ArrayList<>());
+    }
+
+    @Override
+    public UserDto findByUserId(String userId) {
+        UserEntity user = userRepository.findByUserId(userId);
+        UserDto userDto = new ModelMapper().map(user, UserDto.class);
+
+        String orderUrl = "http://localhost:8000/order-serivce/%s/orders";
+
+
+
+        return userDto;
     }
 }

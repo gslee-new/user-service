@@ -64,7 +64,7 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(map);
     }
 
-    @GetMapping("users")
+    @GetMapping("/users")
     public ResponseEntity<List<RequestUser>> retrieveAll() {
         List<UserDto> dtos = userService.findAll();
         ModelMapper mapper = new ModelMapper();
@@ -73,5 +73,13 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(users);
     }
 
+
+    @GetMapping("/users/{userId}")
+    public ResponseEntity<RequestUser> retrieveByUserId(@PathVariable String userId) {
+        UserDto userDto = userService.findByUserId(userId);
+        RequestUser user = new ModelMapper().map(userDto, RequestUser.class);
+
+        return ResponseEntity.status(HttpStatus.OK).body(user);
+    }
 
 }

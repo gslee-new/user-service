@@ -11,4 +11,5 @@ public interface UserService extends UserDetailsService {
 
     List<UserDto> findAll();
 
+    UserDto findByUserId(String userId);
 }
